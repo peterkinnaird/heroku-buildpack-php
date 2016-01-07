@@ -382,7 +382,7 @@ echo "Starting php-fpm..." >&2
 disown $!
 
 # wait a few seconds for FPM to finish initializing; otherwise an early request might break Apache with the FastCGI pipe not being ready
-sleep 2
+sleep 5
 
 echo "Starting httpd..." >&2
 (
