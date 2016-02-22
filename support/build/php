@@ -40,7 +40,7 @@ configureopts=
 if [[ $dep_version == 7.* ]]; then
     configureopts="\
 --with-mcrypt=shared,${OUT_PREFIX} \
---enable-opcache-file\
+#--enable-opcache-file\
 "
 else
     configureopts="\
@@ -101,9 +101,9 @@ curl -sS https://getcomposer.org/installer | php
 # enable all extensions
 mkdir -p ${OUT_PREFIX}/etc/php
 for f in ${OUT_PREFIX}/lib/php/extensions/*/*.so; do
-    if [[ $(basename $f) == "opcache.so" ]]; then
-        echo -n "zend_" >> ${OUT_PREFIX}/etc/php/php.ini
-    fi
+#    if [[ $(basename $f) == "opcache.so" ]]; then
+#        echo -n "zend_" >> ${OUT_PREFIX}/etc/php/php.ini
+#    fi
     echo "extension=$(basename $f)" >> ${OUT_PREFIX}/etc/php/php.ini
 done
 replace=$(php composer.phar show --platform | grep -E '^(ext-\S+|php-64bit\b|hhvm\b)' | tr -s " " | cut -d " " -f1,2 | sed -e "s/ $dep_version\$/ self.version/" -e 's/^/heroku-sys\//')
